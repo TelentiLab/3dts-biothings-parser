@@ -76,7 +76,7 @@ def load_data(data_folder: str):
                 start = int(start)
                 end = int(end)
                 score = float(score)
-                pdb_residue_min = int(pdb_residue_min),
+                pdb_residue_min = int(pdb_residue_min)
                 pdb_residue_max = int(pdb_residue_max)
             except ValueError as e:
                 _logger.error(f'failed to cast type for line {count}: {e}')

@@ -11,7 +11,7 @@ _logger = logging.getLogger('3DTS-parser')
 
 # change following parameters accordingly
 SOURCE_NAME = '3dts'  # source name that appears in the api response
-FILENAME = '3dts_loci_scores.sorted.tsv'  # name of the file to read
+FILENAME = '3dts_loci_scores.sorted.test.tsv'  # name of the file to read
 DELIMITER = '\t'  # the delimiter that separates each field
 
 

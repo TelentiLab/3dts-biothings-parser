@@ -96,10 +96,6 @@ def load_data(data_folder: str):
                 'pdb_residue_max': pdb_residue_max
             }
 
-            _logger.info({
-                "_id": _id,
-                SOURCE_NAME: variant
-            })
             yield {  # commit an entry by yielding
                 "_id": _id,
                 SOURCE_NAME: variant

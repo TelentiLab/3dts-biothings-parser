@@ -56,7 +56,7 @@ def load_data(data_folder: str):
             ratio = count / file_lines
             time_left = datetime.timedelta(seconds=(time.time() - start_time) * (1 - ratio) / ratio)
             # format to use 2 decimals for progress
-            _logger.info(f'reading line {count} ({(count / file_lines * 100):.2f}%), estimated time left: {time_left}')
+            _logger.info(f'reading line {count} ({(ratio * 100):.2f}%), #skipped {len(skipped)}, estimated time left: {time_left}')
 
             if line.startswith('#') or line.strip() == '':
                 skipped.append(line)
@@ -76,8 +76,6 @@ def load_data(data_folder: str):
                 start = int(start)
                 end = int(end)
                 score = float(score)
-                pdb_residue_min = int(pdb_residue_min)
-                pdb_residue_max = int(pdb_residue_max)
             except ValueError as e:
                 _logger.error(f'failed to cast type for line {count}: {e}')
                 skipped.append(line)

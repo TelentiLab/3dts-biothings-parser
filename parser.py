@@ -11,7 +11,7 @@ _logger = logging.getLogger('3DTS-parser')
 
 # change following parameters accordingly
 SOURCE_NAME = '3dts'  # source name that appears in the api response
-FILENAME = '3dts_loci_scores.sorted.test.tsv'  # name of the file to read
+FILENAME = '3dts_loci_scores.sorted.tsv'  # name of the file to read
 DELIMITER = '\t'  # the delimiter that separates each field
 
 
@@ -56,7 +56,8 @@ def load_data(data_folder: str):
             ratio = count / file_lines
             time_left = datetime.timedelta(seconds=(time.time() - start_time) * (1 - ratio) / ratio)
             # format to use 2 decimals for progress
-            _logger.info(f'reading line {count} ({(ratio * 100):.2f}%), #skipped {len(skipped)}, estimated time left: {time_left}')
+            if line % 100000 == 0:
+                _logger.info(f'reading line {count} ({(ratio * 100):.2f}%), #skipped {len(skipped)}, estimated time left: {time_left}')
 
             if line.startswith('#') or line.strip() == '':
                 skipped.append(line)

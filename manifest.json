@@ -4,8 +4,8 @@
         "url" : "https://www.biorxiv.org/content/early/2017/08/29/182287"
     },
     "dumper" : {
-        "data_url" : "http://localhost:8080/data/3dts_loci_scores.sorted.test.tsv",
-        "uncompress" : false,
+        "data_url" : "http://localhost:8080/data/3dts_loci_scores.sorted.tsv.gz",
+        "uncompress" : true,
         "release": "parser:version"
     },
     "uploader" : {

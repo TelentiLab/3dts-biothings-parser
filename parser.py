@@ -54,9 +54,11 @@ def load_data(data_folder: str):
         for line in file:
             count += 1
             ratio = count / file_lines
-            time_left = datetime.timedelta(seconds=(time.time() - start_time) * (1 - ratio) / ratio)
+            time_delta = time.time() - start_time
+            time_left = datetime.timedelta(seconds=time_delta * (1 - ratio) / ratio)
             # format to use 2 decimals for progress
-            _logger.info(f'reading line {count} ({(ratio * 100):.2f}%), #skipped {len(skipped)}, estimated time left: {time_left}')
+            if int(time_delta) % 60 == 0:   # show progress every minute
+                _logger.info(f'reading line {count} ({(ratio * 100):.2f}%), #skipped {len(skipped)}, estimated time left: {time_left}')
 
             if line.startswith('#') or line.strip() == '':
                 skipped.append(line)
@@ -87,18 +89,18 @@ def load_data(data_folder: str):
                 'chrom': chrom,
                 'start': start,
                 'end': end,
-                'score': score,
-                'pdb_id': pdb_id,
-                'pdb_chain': pdb_chain,
-                'uniprot_feature_name': uniprot_feature_name,
-                'pdb_residue_min': pdb_residue_min,
-                'pdb_residue_max': pdb_residue_max
+                'scores': [
+                    {
+                        'score': score,
+                        'pdb_id': pdb_id,
+                        'pdb_chain': pdb_chain,
+                        'uniprot_feature_name': uniprot_feature_name,
+                        'pdb_residue_min': pdb_residue_min,
+                        'pdb_residue_max': pdb_residue_max,
+                    },
+                ]
             }
 
-            _logger.info({
-                "_id": _id,
-                SOURCE_NAME: variant
-            })
             yield {  # commit an entry by yielding
                 "_id": _id,
                 SOURCE_NAME: variant

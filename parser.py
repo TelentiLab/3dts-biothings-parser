@@ -56,8 +56,8 @@ def load_data(data_folder: str):
             ratio = count / file_lines
             time_left = datetime.timedelta(seconds=(time.time() - start_time) * (1 - ratio) / ratio)
             # format to use 2 decimals for progress
-            if line % 100000 == 0:
-                _logger.info(f'reading line {count} ({(ratio * 100):.2f}%), #skipped {len(skipped)}, estimated time left: {time_left}')
+
+            # _logger.info(f'reading line {count} ({(ratio * 100):.2f}%), #skipped {len(skipped)}, estimated time left: {time_left}')
 
             if line.startswith('#') or line.strip() == '':
                 skipped.append(line)
